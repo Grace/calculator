@@ -24,3 +24,19 @@ function operate(operator, x, y) {
        default: return null;
     }
 }
+
+var input = '';
+
+function updateDisplay(value) {
+    let display = document.querySelector('.display');
+    display.textContent = value.toString();
+}
+
+function numberPressed(e) {
+    let number = parseInt(e.target.textContent);
+    input = input.concat(number);
+    updateDisplay(input);
+}
+
+numberDivs = document.querySelectorAll('.number');
+numberDivs.forEach(div => div.addEventListener('click', numberPressed));

@@ -41,6 +41,7 @@ div.display {
     padding-bottom: 2rem;
     justify-content: flex-end;
     font-weight: 300;
+    font-size: 3rem;
 }
 
 div.zero {

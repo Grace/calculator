@@ -8,6 +8,7 @@ let result = null;
 const calculatorButtons = document.querySelectorAll('button.calculator-button');
 const expressionDisplay = document.querySelector('#expression');
 const display = document.querySelector('#display');
+let operatorPressed = false;
 
 window.addEventListener('keydown', function(e) {
     console.log(e.key);
@@ -66,15 +67,38 @@ const inputEquals = () => {
     if (firstOperator === null) {
         // Do nothing
     } else if (firstOperator && !secondOperator) {
-        result = operate(firstOperator, firstOperand, secondOperand);
-        console.log(`result ${result}`);
-        displayValue = result;
-        firstOperand = result;
-        secondOperand = null;
-        firstOperator = null;
-        secondOperator = null;
-        result = null;
-        expressionDisplay.textContent = '';
+            result = operate(firstOperator, firstOperand, secondOperand);
+            console.log(`result ${result}`);
+            expressionDisplay.textContent = result;
+            displayValue = result;
+            firstOperand = result;
+            secondOperand = null;
+            firstOperator = null;
+            secondOperator = null;
+            result = null;
+    } else if (firstOperator && secondOperator) {
+        if (firstOperand && secondOperand === null) {
+            result = operate(firstOperator, firstOperand, secondOperand);
+            console.log(`result ${result}`);
+            expressionDisplay.textContent = result;
+            displayValue = result;
+            firstOperand = result;
+            secondOperand = null;
+            firstOperator = null;
+            secondOperator = null;
+            result = null;
+        } else if (firstOperand && secondOperand) {
+            result = operate(firstOperator, firstOperand, secondOperand);
+            console.log(`both operands result ${result}`);
+            displayValue = result;
+            expressionDisplay.textContent = `${result}${secondOperator}`;
+            display.textContent = displayValue;
+            firstOperand = result;
+            firstOperator = secondOperator;
+            secondOperand = null;
+            secondOperator = null;
+            result = null;
+        }
     }
     console.log(`1st operator ${firstOperator}`);
     console.log(`2nd operator ${secondOperator}`);
@@ -88,37 +112,54 @@ const inputOperator = (operator) => {
         firstOperator = operator;
         firstOperand = displayValue;
         expressionDisplay.textContent += firstOperator;
-    } else if (firstOperator && secondOperator === null) {
+    } else if (firstOperator !== null && secondOperator === null) {
         // 2nd operator clicked
-        secondOperator = operator;
-        secondOperand = displayValue;
+        if(!operatorPressed) {
+            secondOperator = operator;
+            secondOperand = displayValue;
+            inputEquals();
+        }
+    } else if (firstOperator !== null && secondOperator !== null) {
+        if(!operatorPressed) {
+            console.log('1st operator and 2nd operator equal non-null values');
+            inputEquals();
+        }
     } else {
-        console.log('1st operator and 2nd operator equal non-null values');
+        console.log('Exception for inputOperator()');
     }
-    console.log(`1st operator ${firstOperator}`);
-    console.log(`operator ${operator}`);
-    console.log(`2nd operator ${secondOperator}`);
-    console.log(`1st operand ${firstOperand}`);
-    console.log(`2nd operand ${secondOperand}`);
 }
 
 const inputOperand = (operand) => {
+    operatorPressed = false;
     if (firstOperand === null) {
         if (displayValue == 0) {
-            // 1st click
             firstOperand = operand;
             displayValue = operand;
             expressionDisplay.textContent += operand;
         }
     } else if (firstOperand !== null && secondOperand === null) {
         if (firstOperator !== null) {
-            // 3rd click
             secondOperand = operand;
             displayValue = operand;
             expressionDisplay.textContent += operand;
         } else {
             displayValue += operand;
             expressionDisplay.textContent += operand;
+        }
+    } else if (firstOperand !== null && secondOperand !== null) {
+        if (firstOperator !== null && secondOperator == null) {
+            expressionDisplay.textContent = secondOperand;
+            expressionDisplay.textContent += secondOperator;
+        }
+        else if (firstOperator !== null && secondOperator !== null) {
+            // wip
+            result = operate(secondOperator, firstOperand, secondOperand);
+            displayValue = result;
+            firstOperand = result;
+            secondOperand = null;
+            firstOperator = null;
+            secondOperator = null;
+            result = null;
         }
     } else {
         secondOperand += operand;

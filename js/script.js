@@ -4,11 +4,13 @@ let firstOperand = null;
 let secondOperand = null;
 let firstOperator = null;
 let secondOperator = null;
+let operatorPressed = false;
 let result = null;
 const calculatorButtons = document.querySelectorAll('button.calculator-button');
 const expressionDisplay = document.querySelector('#expression');
 const display = document.querySelector('#display');
-let operatorPressed = false;
+
+// Bug to fix: displayValue is not a negative number after subtraction from 0
 
 window.addEventListener('keydown', function(e) {
     console.log(e.key);
@@ -66,7 +68,7 @@ setupClickHandler();
 const inputEquals = () => {
     if (firstOperator === null) {
         // Do nothing
-    } else if (firstOperator && !secondOperator) {
+    } else if (firstOperator !== null && !secondOperator) {
             result = operate(firstOperator, firstOperand, secondOperand);
             console.log(`result ${result}`);
             expressionDisplay.textContent = result;
@@ -76,7 +78,7 @@ const inputEquals = () => {
             firstOperator = null;
             secondOperator = null;
             result = null;
-    } else if (firstOperator && secondOperator) {
+    } else if (firstOperator !== null && secondOperator !== null) {
         if (firstOperand && secondOperand === null) {
             result = operate(firstOperator, firstOperand, secondOperand);
             console.log(`result ${result}`);
@@ -87,7 +89,7 @@ const inputEquals = () => {
             firstOperator = null;
             secondOperator = null;
             result = null;
-        } else if (firstOperand && secondOperand) {
+        } else if (firstOperand !== null && secondOperand !== null) {
             result = operate(firstOperator, firstOperand, secondOperand);
             console.log(`both operands result ${result}`);
             displayValue = result;
@@ -140,7 +142,6 @@ const inputOperand = (operand) => {
     } else if (firstOperand !== null && secondOperand === null) {
         if (firstOperator !== null) {
             secondOperand = operand;
-            displayValue = operand;
             expressionDisplay.textContent += operand;
         } else {
             displayValue += operand;
@@ -152,7 +153,6 @@ const inputOperand = (operand) => {
             expressionDisplay.textContent += secondOperator;
         }
         else if (firstOperator !== null && secondOperator !== null) {
-            // wip
             result = operate(secondOperator, firstOperand, secondOperand);
             displayValue = result;
             firstOperand = result;
@@ -170,10 +170,12 @@ const inputOperand = (operand) => {
 
 const inputPercent = () => {
     displayValue *= 0.01;
+    expressionDisplay.textContent = displayValue;
 }
 
 const inputSign = () => {
     displayValue = -displayValue;
+    expressionDisplay.textContent = displayValue;
 };
 
 const clearDisplay = () => {
@@ -185,7 +187,6 @@ const clearDisplay = () => {
     result = null;
     expressionDisplay.textContent = '';
 };
-
 
 // Operation methods
 const add = (x, y) => {
@@ -208,8 +209,8 @@ const divide = (x, y) => {
 };
 
 const operate = (operator, firstOperand, secondOperand) => {
-    let x = +firstOperand;
-    let y = +secondOperand;
+    let x = Number(firstOperand);
+    let y = Number(secondOperand);
     switch (operator.toString()) {
        case '+': return add(x, y);
        case '-': return subtract(x, y);

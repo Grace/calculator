@@ -6,11 +6,8 @@ let firstOperator = null;
 let secondOperator = null;
 let operatorPressed = false;
 let result = null;
-const calculatorButtons = document.querySelectorAll('button.calculator-button');
-const expressionDisplay = document.querySelector('#expression');
-const display = document.querySelector('#display');
 
-// Bug to fix: displayValue is not a negative number after subtraction from 0
+const calculatorButtons = document.querySelectorAll('button.calculator-button');
 
 window.addEventListener('keydown', function(e) {
     console.log(e.key);
@@ -22,139 +19,157 @@ window.addEventListener('keydown', function(e) {
     }
 });
 
-const updateDisplay = () => {
+const updateDisplay = (displayValue, append = false) => {
     const display = document.querySelector('#display');
-    display.textContent = displayValue;
-    if (displayValue.length > 9) {
-        display.textContent= displayValue.substring(0, 9);
+    if (!append) {
+        display.textContent = displayValue.toString();
+    } else {
+        display.textContent += displayValue.toString();
+    }
+    let displayText = display.textContent.toString();
+    if (displayText.length > 9) {
+        display.textContent = displayText.substring(0, 9);
     }
 };
 
-updateDisplay();
+const updateExpressionDisplay = (expression, append = false) => {
+    const expressionDisplay = document.querySelector('#expression');
+    if (!append) {
+        expressionDisplay.textContent = expression.toString();
+    } else {
+        expressionDisplay.textContent += expression.toString();
+    }
+    let displayText = expressionDisplay.textContent.toString();
+    if(displayText.length > 17) {
+        expressionDisplay.textContent = displayText.substring(0, 17);
+    }
+};
 
 function setupClickHandler() {
     calculatorButtons.forEach(button => {
         button.addEventListener('click', (e) => {
-                //Debugging key presses:
-                console.log(e.target.textContent.toLowerCase());
+                if(displayValue === 'lol') {
+                    clearDisplay();
+                }
                 // Execute functions depending on button type
                 if(button.classList.contains('operand')) {
                     inputOperand(button.textContent);
-                    updateDisplay();
+                    updateDisplay(displayValue);
                 } else if(button.classList.contains('operator')) {
                     inputOperator(button.textContent);
                 } else if(button.classList.contains('equals')) {
                     inputEquals();
-                    updateDisplay();
+                    updateDisplay(displayValue);
+                    updateExpressionDisplay(displayValue);
                 } else if(button.classList.contains('decimal')) {
-                    // inputDecimal(calculatorInput);
-                    updateDisplay();
+                    // TODO: implement decimal functionality
+                    inputDecimal();
+                    updateDisplay(displayValue);
+                    updateExpressionDisplay(displayValue);
                 } else if(button.classList.contains('percent')) {
                     inputPercent();
-                    updateDisplay();
+                    updateDisplay(displayValue);
+                    updateExpressionDisplay(displayValue);
                 } else if(button.classList.contains('sign')) {
                     inputSign();
-                    updateDisplay();
+                    updateDisplay(displayValue);
+                    updateExpressionDisplay(displayValue);
                 } else if(button.classList.contains('clear'))
                     clearDisplay();
-                    updateDisplay();
             }
         )
     }
 )};
 
-setupClickHandler();
+const initialize = () => {
+    updateDisplay(0);
+    setupClickHandler();
+}
+
+initialize();
 
 const inputEquals = () => {
-    if (firstOperator === null) {
+    console.log(`x: ${firstOperand}, ${firstOperator}, y: ${secondOperand}, ${secondOperator}`);
+    if(firstOperand == document.querySelector('#display').textContent) {
         // Do nothing
-    } else if (firstOperator !== null && !secondOperator) {
-            result = operate(firstOperator, firstOperand, secondOperand);
-            console.log(`result ${result}`);
-            expressionDisplay.textContent = result;
-            displayValue = result;
-            firstOperand = result;
-            secondOperand = null;
-            firstOperator = null;
-            secondOperator = null;
-            result = null;
-    } else if (firstOperator !== null && secondOperator !== null) {
-        if (firstOperand && secondOperand === null) {
-            result = operate(firstOperator, firstOperand, secondOperand);
-            console.log(`result ${result}`);
-            expressionDisplay.textContent = result;
-            displayValue = result;
-            firstOperand = result;
-            secondOperand = null;
-            firstOperator = null;
-            secondOperator = null;
-            result = null;
-        } else if (firstOperand !== null && secondOperand !== null) {
-            result = operate(firstOperator, firstOperand, secondOperand);
-            console.log(`both operands result ${result}`);
-            displayValue = result;
-            expressionDisplay.textContent = `${result}${secondOperator}`;
-            display.textContent = displayValue;
-            firstOperand = result;
-            firstOperator = secondOperator;
-            secondOperand = null;
-            secondOperator = null;
-            result = null;
+    }
+    if(firstOperand !== null) {
+        if(secondOperand !== null) {
+            if(firstOperator !== null) {
+                if(secondOperator !== null) {
+                    let result = operate(firstOperator, firstOperand, secondOperand);
+                    console.log(`= ${result}`);
+                    firstOperand = result;
+                    firstOperator = secondOperator;
+                    displayValue = result;
+                    updateDisplay(result);
+                    updateExpressionDisplay(`${result}${firstOperator}`);
+                    secondOperand = null;
+                    secondOperator = null;
+                } else {
+                    let result = operate(firstOperator, firstOperand, secondOperand);
+                    console.log(`= ${result}`);
+                    firstOperand = result;
+                    displayValue = result;
+                    updateDisplay(result);
+                    updateExpressionDisplay(`${result}${firstOperator}`);
+                    secondOperand = null;
+                    firstOperator = null;
+                }
+            }
         }
     }
-    console.log(`1st operator ${firstOperator}`);
-    console.log(`2nd operator ${secondOperator}`);
-    console.log(`1st operand ${firstOperand}`);
-    console.log(`2nd operand ${secondOperand}`);
 }
 
 const inputOperator = (operator) => {
-    if (firstOperator === null && secondOperator === null) {
-        // 2nd click
+    if(firstOperator === null && secondOperator === null) {
         firstOperator = operator;
         firstOperand = displayValue;
-        expressionDisplay.textContent += firstOperator;
-    } else if (firstOperator !== null && secondOperator === null) {
-        // 2nd operator clicked
+        updateExpressionDisplay(firstOperator, true);
+    } else if(firstOperator !== null && secondOperator === null) {
         if(!operatorPressed) {
             secondOperator = operator;
             secondOperand = displayValue;
             inputEquals();
         }
-    } else if (firstOperator !== null && secondOperator !== null) {
+    } else if(firstOperator !== null && secondOperator !== null) {
         if(!operatorPressed) {
-            console.log('1st operator and 2nd operator equal non-null values');
             inputEquals();
         }
     } else {
-        console.log('Exception for inputOperator()');
+        throw new Error('Unhandled scenario in inputOperator()');
     }
 }
 
 const inputOperand = (operand) => {
     operatorPressed = false;
     if (firstOperand === null) {
-        if (displayValue == 0) {
+        if (displayValue === 0 || displayValue === '0') {
             firstOperand = operand;
             displayValue = operand;
-            expressionDisplay.textContent += operand;
+            updateDisplay(operand);
+            updateExpressionDisplay(firstOperand, true);
         }
     } else if (firstOperand !== null && secondOperand === null) {
         if (firstOperator !== null) {
             secondOperand = operand;
-            expressionDisplay.textContent += operand;
+            displayValue = operand;
+            updateDisplay(secondOperand);
+            updateExpressionDisplay(operand, true);
         } else {
             displayValue += operand;
-            expressionDisplay.textContent += operand;
+            updateDisplay(operand, true);
+            updateExpressionDisplay(operand, true);
         }
     } else if (firstOperand !== null && secondOperand !== null) {
         if (firstOperator !== null && secondOperator == null) {
-            expressionDisplay.textContent = secondOperand;
-            expressionDisplay.textContent += secondOperator;
+            updateExpressionDisplay(secondOperand);
+            updateExpressionDisplay(secondOperand, true);
         }
         else if (firstOperator !== null && secondOperator !== null) {
             result = operate(secondOperator, firstOperand, secondOperand);
             displayValue = result;
+            updateDisplay(result);
             firstOperand = result;
             secondOperand = null;
             firstOperator = null;
@@ -164,18 +179,21 @@ const inputOperand = (operand) => {
     } else {
         secondOperand += operand;
         displayValue += operand;
-        expressionDisplay.textContent += operand;
+        updateDisplay(operand, true);
+        updateExpressionDisplay(operand, true);
     }
 };
 
+const inputDecimal = () => {
+    throw new Error('inputDecimal not implemented yet');
+}
+
 const inputPercent = () => {
     displayValue *= 0.01;
-    expressionDisplay.textContent = displayValue;
 }
 
 const inputSign = () => {
     displayValue = -displayValue;
-    expressionDisplay.textContent = displayValue;
 };
 
 const clearDisplay = () => {
@@ -185,7 +203,8 @@ const clearDisplay = () => {
     firstOperator = null;
     secondOperator = null;
     result = null;
-    expressionDisplay.textContent = '';
+    updateDisplay(0);
+    updateExpressionDisplay('');
 };
 
 // Operation methods

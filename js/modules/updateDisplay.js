@@ -1,5 +1,3 @@
-'use strict';
-
 const updateDisplay = (displayValue, append = false) => {
     const display = document.querySelector('#display');
     if (!append) {
@@ -13,4 +11,4 @@ const updateDisplay = (displayValue, append = false) => {
     }
 };
 
-module.exports = updateDisplay;
+export { updateDisplay };

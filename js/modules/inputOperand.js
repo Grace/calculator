@@ -2,7 +2,7 @@ import { operate } from "./operations.js";
 import { updateDisplay } from "./updateDisplay.js";
 import { updateExpressionDisplay } from "./updateExpressionDisplay.js";
 
-// Bug: Adding operands after an operator is pressed does not display in both displays properly
+// TODO bug fix: Adding operands after an operator is pressed does not display in both displays properly
 
 const inputOperand = (operand) => {
     calculatorData.operatorPressed = false;

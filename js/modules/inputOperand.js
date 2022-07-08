@@ -2,8 +2,6 @@ import { operate } from "./operations.js";
 import { updateDisplay } from "./updateDisplay.js";
 import { updateExpressionDisplay } from "./updateExpressionDisplay.js";
 
-// TODO bug fix: Adding operands after an operator is pressed does not display in both displays properly
-
 const inputOperand = (operand) => {
     calculatorData.operatorPressed = false;
     if (calculatorData.firstOperand === null) {
@@ -20,14 +18,17 @@ const inputOperand = (operand) => {
             updateDisplay(calculatorData.secondOperand);
             updateExpressionDisplay(operand, true);
         } else {
+            calculatorData.secondOperand += operand;
             calculatorData.displayValue += operand;
             updateDisplay(operand, true);
             updateExpressionDisplay(operand, true);
         }
     } else if (calculatorData.firstOperand !== null && calculatorData.secondOperand !== null) {
         if (calculatorData.firstOperator !== null && calculatorData.secondOperator == null) {
+            calculatorData.secondOperand += operand;
+            calculatorData.displayValue += operand;
             updateDisplay(calculatorData.secondOperand);
-            updateExpressionDisplay(calculatorData.secondOperand, true);
+            updateExpressionDisplay(operand, true);
         }
         else if (calculatorData.firstOperator !== null && calculatorData.secondOperator !== null) {
             updateExpressionDisplay(calculatorData.secondOperand);

@@ -4,8 +4,16 @@ import { updateExpressionDisplay } from "./updateExpressionDisplay.js";
 
 const inputEquals = () => {
     // console.log(`x: ${calculatorData.firstOperand}, ${calculatorData.firstOperator}, y: ${calculatorData.secondOperand}, ${calculatorData.secondOperator}`);
-    if(calculatorData.firstOperand != document.querySelector('#display').textContent) {
-        if(calculatorData.firstOperand !== null) {
+    if(calculatorData.firstOperand == document.querySelector('#display').textContent) {
+        if(calculatorData.firstOperator == null) {
+            // Do nothing
+        } else if (calculatorData.secondOperand !== null) {
+            calculatorData.result = operate(calculatorData.firstOperator, calculatorData.firstOperand, calculatorData.secondOperand);
+            calculator.firstOperand = calculatorData.result;
+            calculator.firstOperator = null;
+            calculator.secondOperand = null;
+        }
+    } else if(calculatorData.firstOperand !== null) {
             if(calculatorData.secondOperand !== null) {
                 if(calculatorData.firstOperator !== null) {
                     if(calculatorData.secondOperator !== null) {
@@ -20,6 +28,7 @@ const inputEquals = () => {
                         calculatorData.secondOperator = null;
                     } else {
                         calculatorData.result = operate(calculatorData.firstOperator, calculatorData.firstOperand, calculatorData.secondOperand);
+                        // bug in equals
                         console.log(`= ${calculatorData.result}`);
                         calculatorData.firstOperand = calculatorData.result;
                         calculatorData.displayValue = calculatorData.result;
@@ -31,7 +40,6 @@ const inputEquals = () => {
                 }
             }
         }
-    }
-};
+    };
 
 export { inputEquals };

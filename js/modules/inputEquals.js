@@ -28,7 +28,6 @@ const inputEquals = () => {
                         calculatorData.secondOperator = null;
                     } else {
                         calculatorData.result = operate(calculatorData.firstOperator, calculatorData.firstOperand, calculatorData.secondOperand);
-                        // bug in equals
                         console.log(`= ${calculatorData.result}`);
                         calculatorData.firstOperand = calculatorData.result;
                         calculatorData.displayValue = calculatorData.result;

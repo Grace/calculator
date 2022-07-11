@@ -6,4 +6,6 @@ window.calculatorData = {
   secondOperator: null,
   operatorPressed: null,
   result: null,
+  decimalString: null,
+  decimalPressed: null,
 };

@@ -1,7 +1,9 @@
 import { inputEquals } from "./inputEquals.js";
+import { updateDisplay } from "./updateDisplay.js";
 import { updateExpressionDisplay } from "./updateExpressionDisplay.js";
 
 const inputOperator = (operator) => {
+    calculatorData.decimalPressed = false;
     if(calculatorData.operatorPressed !== true) {
         if(calculatorData.firstOperator === null && calculatorData.secondOperator === null) {
             calculatorData.firstOperator = operator;

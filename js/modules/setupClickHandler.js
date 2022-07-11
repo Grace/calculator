@@ -1,5 +1,6 @@
 import { clear } from "./clear.js";
 import { inputEquals } from "./inputEquals.js";
+import { inputDecimal } from "./inputDecimal.js";
 import { inputOperand } from "./inputOperand.js";
 import { inputOperator } from "./inputOperator.js";
 import { updateDisplay } from "./updateDisplay.js";

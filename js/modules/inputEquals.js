@@ -3,6 +3,17 @@ import { updateDisplay } from "./updateDisplay.js";
 import { updateExpressionDisplay } from "./updateExpressionDisplay.js";
 
 const inputEquals = () => {
+    if(calculatorData.decimalPressed === true) {
+        calculatorData.displayValue = parseFloat(calculatorData.decimalString).toFixed(1);
+        if(calculatorData.firstOperand !== null) {
+            calculatorData.secondOperand = calculatorData.displayValue;
+        } else {
+            calculatorData.firstOperand = calculatorData.displayValue;
+        }
+        updateDisplay(calculatorData.displayValue);
+        updateExpressionDisplay(calculatorData.displayValue, true);
+        calculatorData.decimalPressed = false;
+    }
     // console.log(`x: ${calculatorData.firstOperand}, ${calculatorData.firstOperator}, y: ${calculatorData.secondOperand}, ${calculatorData.secondOperator}`);
     if(calculatorData.firstOperand == document.querySelector('#display').textContent) {
         if(calculatorData.firstOperator == null) {

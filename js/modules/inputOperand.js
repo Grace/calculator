@@ -7,34 +7,39 @@ const inputOperand = (operand) => {
         calculatorData.decimalString += operand;
         calculatorData.displayValue += operand;
         updateDisplay(calculatorData.displayValue);
-        updateExpressionDisplay(calculatorData.displayValue);
+        updateExpressionDisplay(operand, true);
+        console.log('inputOperand line 11');
     } else {
         calculatorData.operatorPressed = false;
         if (calculatorData.firstOperand === null) {
             if (calculatorData.displayValue === 0 || calculatorData.displayValue === '0') {
                 calculatorData.firstOperand = operand;
-                calculatorData.displayValue = operand;
-                updateDisplay(operand);
-                updateExpressionDisplay(calculatorData.firstOperand, true);
+                calculatorData.displayValue = calculatorData.formatNumber(operand);
+                updateDisplay(calculatorData.displayValue);
+                updateExpressionDisplay(calculatorData.displayValue, true);
+                console.log('inputOperand line 20');
             }
         } else if (calculatorData.firstOperand !== null && calculatorData.secondOperand === null) {
             if (calculatorData.firstOperator !== null) {
                 calculatorData.secondOperand = operand;
-                calculatorData.displayValue = operand;
-                updateDisplay(calculatorData.secondOperand);
-                updateExpressionDisplay(operand, true);
+                calculatorData.displayValue = calculatorData.formatNumber(operand);
+                updateDisplay(calculatorData.displayValue);
+                updateExpressionDisplay(calculatorData.displayValue, true);
+                console.log('inputOperand line 28');
             } else {
-                calculatorData.secondOperand += operand;
-                calculatorData.displayValue += operand;
-                updateDisplay(operand, true);
-                updateExpressionDisplay(operand, true);
+                calculatorData.displayValue += calculatorData.formatNumber(operand);
+                calculatorData.firstOperand += Number(operand);
+                updateDisplay(calculatorData.displayValue);
+                updateExpressionDisplay(calculatorData.displayValue);
+                console.log('inputOperand line 34');
             }
         } else if (calculatorData.firstOperand !== null && calculatorData.secondOperand !== null) {
             if (calculatorData.firstOperator !== null && calculatorData.secondOperator == null) {
                 calculatorData.secondOperand += operand;
-                calculatorData.displayValue += operand;
-                updateDisplay(calculatorData.secondOperand);
-                updateExpressionDisplay(operand, true);
+                calculatorData.displayValue += calculatorData.formatNumber(operand);
+                updateDisplay(calculatorData.displayValue);
+                updateExpressionDisplay(calculatorData.displayValue);
+                console.log('inputOperand line 42');
             }
             else if (calculatorData.firstOperator !== null && calculatorData.secondOperator !== null) {
                 updateExpressionDisplay(calculatorData.secondOperand);
@@ -46,12 +51,14 @@ const inputOperand = (operand) => {
                 calculatorData.firstOperator = null;
                 calculatorData.secondOperator = null;
                 calculatorData.result = null;
+                console.log('inputOperand line 54');
             }
         } else {
-            calculatorData.secondOperand += operand;
-            calculatorData.displayValue += operand;
+            calculatorData.displayValue += calculatorData.formatNumber(operand);
+            calculatorData.secondOperand += Number(operand);
             updateDisplay(operand, true);
             updateExpressionDisplay(operand, true);
+            console.log('inputOperand line 61');
         }
     }
 };

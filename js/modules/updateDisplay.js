@@ -1,13 +1,13 @@
 const updateDisplay = (displayValue, append = false) => {
     const display = document.querySelector('#display');
+    let text = displayValue;
     if (!append) {
-        display.textContent = displayValue.toString();
+        display.textContent = text;
     } else {
-        display.textContent += displayValue.toString();
+        display.textContent += text;
     }
-    let displayText = display.textContent.toString();
-    if (displayText.length > 9) {
-        display.textContent = displayText.substring(0, 9);
+    if (text.length > 9) {
+        display.textContent = text.substring(0, 9);
     }
 };
 

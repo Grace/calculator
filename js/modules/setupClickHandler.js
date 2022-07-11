@@ -1,5 +1,7 @@
 import { clear } from "./clear.js";
 import { inputEquals } from "./inputEquals.js";
+import { inputSign } from "./operations.js";
+import { inputPercent } from "./operations.js";
 import { inputDecimal } from "./inputDecimal.js";
 import { inputOperand } from "./inputOperand.js";
 import { inputOperator } from "./inputOperator.js";
@@ -24,10 +26,9 @@ function setupClickHandler() {
                     updateDisplay(calculatorData.displayValue);
                     updateExpressionDisplay(calculatorData.displayValue);
                 } else if(button.classList.contains('decimal')) {
-                    // TODO: implement decimal functionality
                     inputDecimal(calculatorData.displayValue);
                     updateDisplay(calculatorData.displayValue);
-                    updateExpressionDisplay(calculatorData.displayValue);
+                    updateExpressionDisplay('.', true);
                 } else if(button.classList.contains('percent')) {
                     calculatorData.displayValue = inputPercent(calculatorData.displayValue);
                     updateDisplay(calculatorData.displayValue);

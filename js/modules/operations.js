@@ -2,22 +2,22 @@
 
 // Operation methods
 const add = (x, y) => {
-    return Number(x + y);
+    return calculatorData.formatNumber(Number(x + y));
 }
 
 const subtract = (x, y) => {
-    return Number(x - y);
+    return calculatorData.formatNumber(Number(x - y));
 }
 
 const multiply = (x, y) => {
-    return Number(x * y);
+    return calculatorData.formatNumber(Number(x * y));
 }
 
 const divide = (x, y) => {
-    if (y === 0) {
+    if (y === 0 || y === '0') {
         return 'lol';
     }
-    return Number(x / y);
+    return calculatorData.formatNumber(Number(x / y));
 };
 
 const operate = (operator, firstOperand, secondOperand) => {
@@ -37,7 +37,7 @@ const inputPercent = (n) => {
 }
 
 const inputSign = (n) => {
-    return n * -1;
+    return -n;
 };
 
 export { operate, inputPercent, inputSign };

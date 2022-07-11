@@ -8,4 +8,12 @@ window.calculatorData = {
   result: null,
   decimalString: null,
   decimalPressed: null,
+  formatNumber: (n) => {
+    n = Number(n.toString());
+    if(n - Math.floor(n) !== 0) {
+      return n.toFixed(1);
+    } else {
+      return n.toFixed(0);
+    }
+  },
 };

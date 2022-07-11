@@ -20,6 +20,7 @@ const inputEquals = () => {
             // Do nothing
         } else if (calculatorData.secondOperand !== null) {
             calculatorData.result = operate(calculatorData.firstOperator, calculatorData.firstOperand, calculatorData.secondOperand);
+            console.log(`= ${calculatorData.result}`);
             calculator.firstOperand = calculatorData.result;
             calculator.firstOperator = null;
             calculator.secondOperand = null;

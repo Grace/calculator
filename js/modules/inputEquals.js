@@ -1,4 +1,3 @@
-import { clear } from "./clear.js"
 import { operate } from "./operate.js";
 import { updateDisplay } from "./updateDisplay.js";
 import { updateExpressionDisplay } from "./updateExpressionDisplay.js";

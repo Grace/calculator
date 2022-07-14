@@ -1,6 +1,3 @@
-import { updateDisplay } from "./updateDisplay.js";
-import { updateExpressionDisplay } from "./updateExpressionDisplay.js";
-
 const inputDecimal = () => {
     // If displayValue doesn't contain ".", append "." to decimalString
     if(!calculatorData.displayValue.includes('.')) {

@@ -35,4 +35,4 @@ const operate = (operator, firstOperand, secondOperand) => {
     }
 };
 
-module.exports = operate;
+export { operate };

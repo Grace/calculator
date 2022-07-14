@@ -1,5 +1,5 @@
 import { inputEquals } from "./inputEquals.js";
-import { updateDisplay } from "./updateDisplay.js";
+// import { updateDisplay } from "./updateDisplay.js";
 import { updateExpressionDisplay } from "./updateExpressionDisplay.js";
 
 const inputOperator = (operator) => {

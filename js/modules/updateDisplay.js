@@ -1,6 +1,13 @@
 const updateDisplay = (displayValue, append = false) => {
     const display = document.querySelector('#display');
-    let text = displayValue.toString();
+    let text;
+
+    if(displayValue !== 'lol' && (isNaN(displayValue) || displayValue === null)) {
+        text = 'NaN';
+    } else { 
+        text = displayValue.toString();
+    }
+
     if (!append) {
         display.textContent = text;
     } else {
@@ -11,4 +18,4 @@ const updateDisplay = (displayValue, append = false) => {
     }
 };
 
-module.exports = updateDisplay;
+export { updateDisplay };

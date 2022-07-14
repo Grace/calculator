@@ -2,30 +2,18 @@
 
 // Operation methods
 const add = (x, y) => {
-    if(x == NaN || y == NaN || x == null || y == null) {
-        return NaN;
-    }
     return calculatorData.formatNumber(Number(x + y));
 }
 
 const subtract = (x, y) => {
-    if(x == NaN || y == NaN || x == null || y == null) {
-        return NaN;
-    }
     return calculatorData.formatNumber(Number(x - y));
 }
 
 const multiply = (x, y) => {
-    if(x == NaN || y == NaN || x == null || y == null) {
-        return NaN;
-    }
     return calculatorData.formatNumber(Number(x * y));
 }
 
 const divide = (x, y) => {
-    if(x == NaN || y == NaN || x == null || y == null) {
-        return NaN;
-    }
     if (y === 0 || y === '0') {
         return 'lol';
     }
@@ -33,6 +21,9 @@ const divide = (x, y) => {
 };
 
 const operate = (operator, firstOperand, secondOperand) => {
+    if((isNaN(firstOperand) || isNaN(secondOperand)) || (firstOperand === null || secondOperand === null)) {
+        return NaN;
+    }
     let x = Number(firstOperand);
     let y = Number(secondOperand);
     switch (operator.toString()) {
@@ -40,7 +31,7 @@ const operate = (operator, firstOperand, secondOperand) => {
        case '-': return subtract(x, y);
        case '*': return multiply(x, y);
        case '/': return divide(x, y);
-       default: return 'NaN';
+       default: throw Error('Invalid operator parameter for operate().');
     }
 };
 

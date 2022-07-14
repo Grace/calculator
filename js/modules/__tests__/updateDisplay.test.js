@@ -8,13 +8,13 @@
 
 'use strict';
 
-jest.mock('../js/updateDisplay');
+jest.mock('../updateDisplay');
 
 describe('updateDisplay test suite', () => {
     test('numeric 1 displays as string 1', () => {
         document.body.innerHTML = '<output label="display" id="display" class="grid-item display rounded-box">0</output>';
         const $ = require('jquery');
-        const updateDisplay = require('../js/modules/updateDisplay');
+        const updateDisplay = require('../updateDisplay');
         updateDisplay.mockImplementation((displayValue, append = false) => {
             const display = document.querySelector('#display');
             if (!append) {

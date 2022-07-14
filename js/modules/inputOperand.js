@@ -1,8 +1,9 @@
-import { operate } from "./operations.js";
+import { operate } from "./operate.js";
 import { updateDisplay } from "./updateDisplay.js";
 import { updateExpressionDisplay } from "./updateExpressionDisplay.js";
 
 const inputOperand = (operand) => {
+    calculatorData.operatorPressed = false;
     if(calculatorData.decimalPressed) {
         calculatorData.decimalString += operand;
         calculatorData.displayValue += operand;
@@ -10,10 +11,10 @@ const inputOperand = (operand) => {
         updateExpressionDisplay(operand, true);
         console.log('inputOperand line 11');
     } else {
-        calculatorData.operatorPressed = false;
+        console.dir(calculatorData);
         if (calculatorData.firstOperand === null) {
             if (calculatorData.displayValue === 0 || calculatorData.displayValue === '0') {
-                calculatorData.firstOperand = operand;
+                calculatorData.firstOperand = Number(operand);
                 calculatorData.displayValue = calculatorData.formatNumber(operand);
                 updateDisplay(calculatorData.displayValue);
                 updateExpressionDisplay(calculatorData.displayValue, true);
@@ -21,21 +22,24 @@ const inputOperand = (operand) => {
             }
         } else if (calculatorData.firstOperand !== null && calculatorData.secondOperand === null) {
             if (calculatorData.firstOperator !== null) {
-                calculatorData.secondOperand = operand;
+                calculatorData.secondOperand = Number(operand);
                 calculatorData.displayValue = calculatorData.formatNumber(operand);
                 updateDisplay(calculatorData.displayValue);
                 updateExpressionDisplay(calculatorData.displayValue, true);
                 console.log('inputOperand line 28');
+                // calculatorData.operatorPressed = false;
             } else {
-                calculatorData.displayValue += calculatorData.formatNumber(operand);
-                calculatorData.firstOperand += Number(operand);
+                calculatorData.displayValue = calculatorData.formatNumber(operand);
+                calculatorData.firstOperand = Number(operand);
                 updateDisplay(calculatorData.displayValue);
                 updateExpressionDisplay(calculatorData.displayValue);
                 console.log('inputOperand line 34');
+                console.dir(calculatorData);
+                // calculatorData.operatorPressed = false;
             }
         } else if (calculatorData.firstOperand !== null && calculatorData.secondOperand !== null) {
             if (calculatorData.firstOperator !== null && calculatorData.secondOperator == null) {
-                calculatorData.secondOperand += operand;
+                calculatorData.secondOperand += Number(operand);
                 calculatorData.displayValue += calculatorData.formatNumber(operand);
                 updateDisplay(calculatorData.displayValue);
                 updateExpressionDisplay(calculatorData.displayValue);

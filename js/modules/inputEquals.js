@@ -1,4 +1,5 @@
-import { operate } from "./operations.js";
+import { clear } from "./clear.js"
+import { operate } from "./operate.js";
 import { updateDisplay } from "./updateDisplay.js";
 import { updateExpressionDisplay } from "./updateExpressionDisplay.js";
 
@@ -18,12 +19,29 @@ const inputEquals = () => {
     if(calculatorData.firstOperand == document.querySelector('#display').textContent) {
         if(calculatorData.firstOperator == null) {
             // Do nothing
+            console.log('equals line 21');
+            console.dir(calculatorData);
+            calculatorData.result = operate(calculatorData.secondOperator, calculatorData.firstOperand, calculatorData.secondOperand);
+            calculatorData.displayValue = calculatorData.result;
+            updateDisplay(calculatorData.displayValue);
+            updateExpressionDisplay(calculatorData.displayValue);
+            calculatorData.firstOperator = null;
+            calculatorData.secondOperand = null;
+            calculatorData.secondOperator = null;
         } else if (calculatorData.secondOperand !== null) {
             calculatorData.result = operate(calculatorData.firstOperator, calculatorData.firstOperand, calculatorData.secondOperand);
             console.log(`= ${calculatorData.result}`);
+            console.dir(calculatorData);
             calculator.firstOperand = calculatorData.result;
-            calculator.firstOperator = null;
-            calculator.secondOperand = null;
+            calculatorData.displayValue = calculatorData.result;
+            updateDisplay(calculatorData.displayValue);
+            updateExpressionDisplay(calculatorData.displayValue, true);
+            calculatorData.firstOperator = null;
+            calculatorData.secondOperand = null;
+            // calculatorData.operatorPressed = false;
+            // calculatorData.result = null;
+            console.log(`inputEquals line 32`);
+            console.dir(calculatorData);
         }
     } else if(calculatorData.firstOperand !== null) {
             if(calculatorData.secondOperand !== null) {
@@ -38,6 +56,7 @@ const inputEquals = () => {
                         updateExpressionDisplay(`${calculatorData.result}${calculatorData.firstOperator}`);
                         calculatorData.secondOperand = null;
                         calculatorData.secondOperator = null;
+                        console.log(`inputEquals line 46`);
                     } else {
                         calculatorData.result = operate(calculatorData.firstOperator, calculatorData.firstOperand, calculatorData.secondOperand);
                         console.log(`= ${calculatorData.result}`);
@@ -47,6 +66,7 @@ const inputEquals = () => {
                         updateExpressionDisplay(`${calculatorData.result}${calculatorData.firstOperator}`);
                         calculatorData.secondOperand = null;
                         calculatorData.firstOperator = null;
+                        console.log(`inputEquals line 57`);
                     }
                 }
             }

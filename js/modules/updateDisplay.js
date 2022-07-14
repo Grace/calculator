@@ -1,6 +1,6 @@
 const updateDisplay = (displayValue, append = false) => {
     const display = document.querySelector('#display');
-    let text = displayValue;
+    let text = displayValue.toString();
     if (!append) {
         display.textContent = text;
     } else {
@@ -11,4 +11,4 @@ const updateDisplay = (displayValue, append = false) => {
     }
 };
 
-export { updateDisplay };
+module.exports = updateDisplay;

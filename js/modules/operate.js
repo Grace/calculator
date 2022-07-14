@@ -2,18 +2,30 @@
 
 // Operation methods
 const add = (x, y) => {
+    if(x == NaN || y == NaN || x == null || y == null) {
+        return NaN;
+    }
     return calculatorData.formatNumber(Number(x + y));
 }
 
 const subtract = (x, y) => {
+    if(x == NaN || y == NaN || x == null || y == null) {
+        return NaN;
+    }
     return calculatorData.formatNumber(Number(x - y));
 }
 
 const multiply = (x, y) => {
+    if(x == NaN || y == NaN || x == null || y == null) {
+        return NaN;
+    }
     return calculatorData.formatNumber(Number(x * y));
 }
 
 const divide = (x, y) => {
+    if(x == NaN || y == NaN || x == null || y == null) {
+        return NaN;
+    }
     if (y === 0 || y === '0') {
         return 'lol';
     }
@@ -32,12 +44,4 @@ const operate = (operator, firstOperand, secondOperand) => {
     }
 };
 
-const inputPercent = (n) => {
-    return n * 0.01;
-}
-
-const inputSign = (n) => {
-    return -n;
-};
-
-export { operate, inputPercent, inputSign };
+module.exports = operate;

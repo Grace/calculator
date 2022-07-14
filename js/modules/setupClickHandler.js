@@ -1,7 +1,7 @@
 import { clear } from "./clear.js";
 import { inputEquals } from "./inputEquals.js";
-import { inputSign } from "./operations.js";
-import { inputPercent } from "./operations.js";
+import { inputSign } from "./inputSign.js";
+import { inputPercent } from "./inputPercent.js";
 import { inputDecimal } from "./inputDecimal.js";
 import { inputOperand } from "./inputOperand.js";
 import { inputOperator } from "./inputOperator.js";

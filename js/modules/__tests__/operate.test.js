@@ -3,8 +3,7 @@
  */
 
 'use strict';
-import '../calculatorData';
-import { operate } from '../operate.js';
+import { operate } from '../calculatorMath.js';
 
 global.operate = operate;
 

@@ -2,10 +2,6 @@
  * @jest-environment jsdom
  */
 
-/**
-* Simple example of using Jest to test code in units serarately from the main script
-*/
-
 'use strict';
 import $ from 'jquery';
 import { updateDisplay } from '../updateDisplay.js';

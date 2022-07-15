@@ -22,20 +22,21 @@ const inputOperand = (operand) => {
             }
         } else if (calculatorData.firstOperand !== null && calculatorData.secondOperand === null) {
             if (calculatorData.firstOperator !== null) {
-                calculatorData.secondOperand = Number(operand);
+                calculatorData.secondOperand = calculatorData.formatNumber(operand);
                 calculatorData.displayValue = calculatorData.formatNumber(operand);
                 updateDisplay(calculatorData.displayValue);
                 updateExpressionDisplay(calculatorData.displayValue, true);
                 console.log('inputOperand line 28');
-                // calculatorData.operatorPressed = false;
             } else {
-                calculatorData.displayValue = calculatorData.formatNumber(operand);
-                calculatorData.firstOperand = Number(operand);
+                // Debug here
+                calculatorData.displayValue = calculatorData.firstOperand.toString() + calculatorData.formatNumber(operand);
+                calculatorData.firstOperand = calculatorData.firstOperand.toString() + calculatorData.formatNumber(operand);
                 updateDisplay(calculatorData.displayValue);
                 updateExpressionDisplay(calculatorData.displayValue);
+                calculatorData.firstOperand = calculatorData.result;
+                calculatorData.secondOperand = null;
                 console.log('inputOperand line 34');
                 console.dir(calculatorData);
-                // calculatorData.operatorPressed = false;
             }
         } else if (calculatorData.firstOperand !== null && calculatorData.secondOperand !== null) {
             if (calculatorData.firstOperator !== null && calculatorData.secondOperator == null) {

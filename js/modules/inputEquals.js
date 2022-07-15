@@ -27,7 +27,7 @@ const inputEquals = () => {
             calculatorData.firstOperator = null;
             calculatorData.secondOperand = null;
             calculatorData.secondOperator = null;
-        } else if (calculatorData.secondOperand !== null) {
+        } else if(calculatorData.secondOperand !== null) {
             calculatorData.result = operate(calculatorData.firstOperator, calculatorData.firstOperand, calculatorData.secondOperand);
             console.log(`= ${calculatorData.result}`);
             console.dir(calculatorData);
@@ -57,6 +57,7 @@ const inputEquals = () => {
                         calculatorData.secondOperator = null;
                         console.log(`inputEquals line 46`);
                     } else {
+                        console.dir(calculatorData);
                         calculatorData.result = operate(calculatorData.firstOperator, calculatorData.firstOperand, calculatorData.secondOperand);
                         console.log(`= ${calculatorData.result}`);
                         calculatorData.firstOperand = calculatorData.result;

@@ -15,7 +15,7 @@ describe('Calculator', () => {
         await expect(global.page.title()).resolves.toMatch('Calculator');
     });
 
-    it('Pressing 1 should display 1 in #display and #expression', async () => {
+    it('1 + 1 = 2', async () => {
         await page.click('button[label="one"]');
         let display = await page.evaluate(() => document.getElementById('display').textContent);
         let expression = await page.evaluate(() => document.getElementById('expression').textContent);

@@ -12,3 +12,5 @@ View here: https://grace.github.io/calculator/
 Live Server with Visual Studio code to serve the files.
 
 Copyright 2022 by Grace on Github.
+
+UI logic influenced by @michalosman and rainbow text inspired by @fossheim.

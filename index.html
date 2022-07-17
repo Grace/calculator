@@ -9,42 +9,44 @@
     <script type="module" src="./js/script.js" defer></script>
 </head>
 <body>
-    <header id="header" role="header" label="header">
-        <nav>
-            <ul>
-                <li>
-                    <h1 class="gradient-text">Math is fun.</h1>
-                </li>
-            </ul>
-        </nav>
-    </header>
-    <main id="calculator" role="calculator" label="calculator">
-        <div id="grid-container" class="grid-container" role="grid" label="button grid">
-            <output label="expression" id="expression" class="grid-item expression rounded-box"></output>
-            <output label="display" id="display" class="grid-item display rounded-box">0</output>
-            <button label="clear" data-key="c" id="clear" class="calculator-button grid-item clear circle">C</button>
-            <button label="change sign" data-key="s" id="changeSign" class="calculator-button grid-item sign circle">+/-</button>
-            <button label="percent" data-key="%" id="percent" class="calculator-button grid-item percent circle">%</button>
-            <button label="divide" data-key="/" id="divide" class="calculator-button grid-item operator circle accent-color">/</button>
-            <button label="seven" data-key="7" class="calculator-button grid-item circle operand">7</button>
-            <button label="eight" data-key="8" class="calculator-button grid-item circle operand">8</button>
-            <button label="nine" data-key="9" class="calculator-button grid-item circle operand">9</button>
-            <button label="multiply" data-key="*" id="multiply" class="calculator-button grid-item multiply operator circle accent-color">*</button>
-            <button label="four" data-key="4" class="calculator-button grid-item circle operand">4</button>
-            <button label="five" data-key="5" class="calculator-button grid-item circle operand">5</button>
-            <button label="six" data-key="6" class="calculator-button grid-item circle operand">6</button>
-            <button label="minus" data-key="-" id="minus" class="calculator-button grid-item operator circle accent-color">-</button>
-            <button label="one" data-key="1" class="calculator-button grid-item circle operand">1</button>
-            <button label="two" data-key="2" class="calculator-button grid-item circle operand">2</button>
-            <button label="three" data-key="3" class="calculator-button grid-item circle operand">3</button>
-            <button label="plus" data-key="+" id="plus" class="calculator-button grid-item operator circle accent-color">+</button>
-            <button label= "zero" data-key="0" id="zero" class="calculator-button grid-item rounded-box zero operand">0</button>
-            <button label="decimal" data-key="." id="decimal" class="calculator-button grid-item decimal circle">.</button>
-            <button label="equals" data-key="=" id="equals" class="calculator-button grid-item equals circle accent-color">=</button>
-        </div>
-    </main>
-    <footer class="footer-text">
-        <span>Copyright © <script>document.write( new Date().getFullYear() );</script> by <a href="https://github.com/Grace/calculator">@Grace</a> on Github.</span>
-    </footer>
+    <div class="wrapper">
+        <header id="header" role="header" label="header">
+            <nav>
+                <ul>
+                    <li>
+                        <h1 class="gradient-text">Math is fun.</h1>
+                    </li>
+                </ul>
+            </nav>
+        </header>
+        <main id="calculator" role="calculator" label="calculator">
+            <div id="grid-container" class="grid-container" role="grid" label="button grid">
+                <output label="expression" id="expression" class="grid-item expression rounded-box"></output>
+                <output label="display" id="display" class="grid-item display rounded-box">0</output>
+                <button label="clear" data-key="c" id="clear" class="calculator-button grid-item clear circle">C</button>
+                <button label="change sign" data-key="s" id="changeSign" class="calculator-button grid-item sign circle">+/-</button>
+                <button label="percent" data-key="%" id="percent" class="calculator-button grid-item percent circle">%</button>
+                <button label="divide" data-key="/" id="divide" class="calculator-button grid-item operator circle accent-color">/</button>
+                <button label="seven" data-key="7" class="calculator-button grid-item circle operand">7</button>
+                <button label="eight" data-key="8" class="calculator-button grid-item circle operand">8</button>
+                <button label="nine" data-key="9" class="calculator-button grid-item circle operand">9</button>
+                <button label="multiply" data-key="*" id="multiply" class="calculator-button grid-item multiply operator circle accent-color">*</button>
+                <button label="four" data-key="4" class="calculator-button grid-item circle operand">4</button>
+                <button label="five" data-key="5" class="calculator-button grid-item circle operand">5</button>
+                <button label="six" data-key="6" class="calculator-button grid-item circle operand">6</button>
+                <button label="minus" data-key="-" id="minus" class="calculator-button grid-item operator circle accent-color">-</button>
+                <button label="one" data-key="1" class="calculator-button grid-item circle operand">1</button>
+                <button label="two" data-key="2" class="calculator-button grid-item circle operand">2</button>
+                <button label="three" data-key="3" class="calculator-button grid-item circle operand">3</button>
+                <button label="plus" data-key="+" id="plus" class="calculator-button grid-item operator circle accent-color">+</button>
+                <button label= "zero" data-key="0" id="zero" class="calculator-button grid-item rounded-box zero operand">0</button>
+                <button label="decimal" data-key="." id="decimal" class="calculator-button grid-item decimal circle">.</button>
+                <button label="equals" data-key="=" id="equals" class="calculator-button grid-item equals circle accent-color">=</button>
+            </div>
+        </main>
+        <footer class="footer-text">
+            <span>Copyright © <script>document.write( new Date().getFullYear() );</script> by <a class="gradient-text" href="https://github.com/Grace/calculator">@Grace </a></span>
+        </footer>
+    </div>
 </body>
 </html>
